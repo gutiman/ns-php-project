@@ -1,0 +1,20 @@
+.top-space {
+    margin-top: 20px;
+}
+
+.hidden {
+    display: none;
+}
+
+fieldset {
+    border: 1px solid darkblue;
+    border-radius: 10px;
+    padding: 10px;
+
+}
+
+fieldset legend {
+    background: lightblue;
+    padding: 6px;
+    font-weight: bold;
+}

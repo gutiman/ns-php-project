@@ -1,0 +1,13 @@
+web:
+    image: fabiohan/php7-apache
+    ports:
+        - 80:80
+    volumes:
+        - ./www:/var/www/html/
+        - ./apache:/etc/apache2/sites-available/
+    links:
+        - sqlite3
+
+sqlite3:
+    build: './sqlite3/'
+    restart: always
