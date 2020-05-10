@@ -10,12 +10,8 @@
  
 $config = array(
     "db" => array(
-        "db1" => array(
-            "dbname" => "database1",
-            "username" => "dbUser",
-            "password" => "pa$$",
-            "host" => "localhost"
-        )
+        "dbname" => "sqlite3",
+        "file_path" => "../../sqlite3/lookup.db"
     ),
     "urls" => array(
         "baseUrl" => "http://192.168.100.122/"
