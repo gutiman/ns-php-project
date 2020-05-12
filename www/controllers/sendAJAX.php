@@ -5,7 +5,7 @@
         // load up your config file
         require_once("../config/config.php");     
 
-        if(isset($_REQUEST['model']) && isset($_REQUEST['function']) && trim($_REQUEST['model']) != "" && trim($_REQUEST['function']) != "") {
+        if(isset($_REQUEST['model']) && isset($_REQUEST['function']) && isset($_REQUEST['dns_lookup']) && trim($_REQUEST['model']) != "" && trim($_REQUEST['function']) != "" && trim($_REQUEST['dns_lookup']) != "") {
             require_once(MODEL_PATH . "/" . $_REQUEST['model'] . ".php");
             $model = new $_REQUEST['model']();
             $function = $_REQUEST['function'];
@@ -26,7 +26,7 @@
             echo json_encode($aResult);
         }
         else {
-            throw new Exception("Empty model or function name", 1);
+            throw new Exception("Empty model, function name or domains list", 1);
         }        
     } catch (\Exception $th) {
         $aResult = array("error" => array("type" => "alert", "msj" => $th->getMessage()));

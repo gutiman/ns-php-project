@@ -15,11 +15,8 @@
                 "NS" => @dns_get_record($dns, DNS_NS),
                 "A" => @dns_get_record($dns, DNS_A)
             );
-            
             // Insert the results into the database
-            $this->insertLookup($dns, $aResult);
-            // Return the result to display the info
-            return array("type" => "success", "msj" => "Lookup performed successfully");
+            return $this->insertLookup($dns, $aResult);
         }
 
         private function insertLookup($dns, $dns_result) {
@@ -28,7 +25,7 @@
 
             // if already exists, use the same domain id and only update the record
             if(count($aResult) > 0) {
-                if(count($dns_result) > 0) {
+                if(count($dns_result['A']) > 0 && count($dns_result['NS']) > 0) {
                     // insert the record
                     $this->insertIntoRecord($aResult[0]['id'], $dns_result);
                 }
@@ -41,7 +38,7 @@
                 // Insert into result
                 $iNewId = $this->insertIntoResult($dns);
 
-                if(count($dns_result) > 0) {
+                if(count($dns_result['A']) > 0 && count($dns_result['NS']) > 0) {
                     // Insert the record
                     $this->insertIntoRecord($iNewId, $dns_result);
                 }
@@ -51,7 +48,7 @@
                 }
             }
             
-            return "OK";
+            return array("type" => "alert", "msj" => "Lookup performed successfully");
         }
 
         private function getDomainResult($dns) {

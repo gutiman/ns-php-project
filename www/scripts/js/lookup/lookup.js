@@ -23,9 +23,11 @@ $(document).ready(function() {
             params,
             function(data) {
                 // Return the result of the lookup
-                calloutMsj(data.type, 'Success!', data.msj);
+                calloutMsj(data.type, data.type === 'success' ? 'Success!' : 'Failure', data.msj);
                 // remove all domains
                 $('.data-dns').remove();
+                // Hide the lookup button
+                $('#btn_do_lookup').addClass('hidden');
             },
             'json'
         )
