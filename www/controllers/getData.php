@@ -1,5 +1,7 @@
 <?php 
+    // Get config details
     require_once("../config/config.php");
+    // Get model
     require_once(MODEL_PATH . "/lookup.php");
 
     Class GetData {
@@ -10,6 +12,7 @@
         }
 
         function getLatestDomains() {
+            // call model method and return result
             $aResult = $this->lookup->getLookupResults();
             return $aResult;
         }

@@ -1,14 +1,17 @@
 $(document).foundation();
 
 function calloutMsj(type, header, content, keepOpen) {
+    // Create a callout or alert with the result of the AJAX call
     var sCallout = '';
 
-    if(type !== 'empty') {    
+    if(type !== 'empty') {
+        // take advantage of the callout class in Foundation
         sCallout +=
             '<div class="callout ' + type + '" data-closable="slide-out-right">' +
                 '<h5><strong>' + header + '</strong></h5>' +
                 '<p>' + content + '</p>';
 
+        // In case we want to make the callout closable
         if(typeof keepOpen === 'undefined' || keepOpen === false) {
             sCallout += 
                 '<button class="close-button" aria-label="Dismiss alert" type="button" data-close>' + 
@@ -19,9 +22,7 @@ function calloutMsj(type, header, content, keepOpen) {
         sCallout += '</div>';
     }
 
-    $('#callout').html(
-        sCallout
-    );
+    $('#callout').html(sCallout);
 }
 
 function formQueryToJSON(urlparams) {

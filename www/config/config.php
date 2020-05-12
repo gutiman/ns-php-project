@@ -10,6 +10,7 @@
 
 defined('CONFIG') or define('CONFIG', 
     array(
+        // DB Settings
         "db" => array(
             "dbname" => "sqlite3",
             "file_path" => $_SERVER["DOCUMENT_ROOT"] . "/resources/db/lookup.db"
