@@ -3,6 +3,7 @@
         <div class="cell small-8 small-offset-2 top-space">
             <form id="form_lookup">
                 <input type="hidden" name="model" value="lookup" />
+                <input type="hidden" name="function" value="lookupForDNS" />
                 <fieldset>
                     <legend>Lookup DNS</legend>
                     <div class="grid-container">
@@ -30,6 +31,10 @@
                 </fieldset>
             </form>
         </div>
+    </div>
+
+    <div class="grid-x">
+        <div class="cell small-10 small-offset-1 top-space" id="div_last_10_domains"></div>
     </div>
 </div>
 

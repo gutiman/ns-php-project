@@ -23,8 +23,9 @@ $(document).ready(function() {
             params,
             function(data) {
                 // Return the result of the lookup
-                console.log(data);
-                calloutMsj('empty');
+                calloutMsj(data.type, 'Success!', data.msj);
+                // remove all domains
+                $('.data-dns').remove();
             },
             'json'
         )
@@ -32,10 +33,13 @@ $(document).ready(function() {
             if(typeof data.error !== 'undefined') {
                 calloutMsj(data.error.type, 'Error', data.error.msj);
             }
+            addTopDomains();
             
             $('#btn_do_lookup').prop('disabled', false);
         });
-    })
+    });
+
+    addTopDomains();
 });
 
 function addToList(dns) {
@@ -75,4 +79,16 @@ function removeDNS(button) {
     if($('#div_dns_to_lookup').find('div').length === 0) {
         $('#btn_do_lookup').addClass('hidden');
     }
+}
+
+function addTopDomains() {
+    $('#div_last_10_domains').load(
+        '/views/top_domains.php',
+        {},
+        function(data, status, error) {
+            if(status !== 'success') {
+                calloutMsj(alert, 'Error', error);
+            }
+        }
+    );
 }

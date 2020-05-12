@@ -5,7 +5,7 @@ function calloutMsj(type, header, content, keepOpen) {
 
     if(type !== 'empty') {    
         sCallout +=
-            '<div class="callout ' + type + '">' +
+            '<div class="callout ' + type + '" data-closable="slide-out-right">' +
                 '<h5><strong>' + header + '</strong></h5>' +
                 '<p>' + content + '</p>';
 

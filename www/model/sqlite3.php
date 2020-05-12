@@ -9,13 +9,38 @@
         * PDO instance
         * @var type 
         */
-        private $db = new SQLite3($config->db->file_path);
+        private $db = null;
 
+        function __construct() {
+            $this->db = new SQLite3(CONFIG['db']['file_path'], SQLITE3_OPEN_READWRITE);
+        }
 
         public function query($query) {
-            $results = $db->query($query);
+            try {
+                $aResults = array();
+                $results = $this->db->query($query);
+                
+                while ($aRow = $results->fetchArray(SQLITE3_ASSOC)) {
+                    array_push($aResults, $aRow);
+                }
 
-            return $results;
+                return $aResults;
+            }
+            catch(\Exception $e) {
+                return $e->getMessage();
+            }
+        }
+
+        public function insertUpdateDelete($query) {
+            try {
+                $aResults = array();
+                $results = $this->db->query($query);
+                
+                return true;
+            }
+            catch(\Exception $e) {
+                return $e->getMessage();
+            }
         }
     }
 ?>

@@ -7,17 +7,16 @@
     if something changes such as your database credentials, or a path to a specific resource,
     you'll only need to update it here.
 */
- 
-$config = array(
-    "db" => array(
-        "dbname" => "sqlite3",
-        "file_path" => "../../sqlite3/lookup.db"
-    ),
-    "urls" => array(
-        "baseUrl" => "http://192.168.100.122/"
-    ),
-    "paths" => array(
-        "images" => $_SERVER["DOCUMENT_ROOT"] . "/imgs/"
+
+defined('CONFIG') or define('CONFIG', 
+    array(
+        "db" => array(
+            "dbname" => "sqlite3",
+            "file_path" => $_SERVER["DOCUMENT_ROOT"] . "/resources/db/lookup.db"
+        ),
+        "urls" => array(
+            "baseUrl" => "http://192.168.100.122/"
+        )
     )
 );
  

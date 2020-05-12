@@ -5,20 +5,28 @@
         // load up your config file
         require_once("../config/config.php");     
 
-        if(trim($_REQUEST['model']) != "") {
+        if(isset($_REQUEST['model']) && isset($_REQUEST['function']) && trim($_REQUEST['model']) != "" && trim($_REQUEST['function']) != "") {
             require_once(MODEL_PATH . "/" . $_REQUEST['model'] . ".php");
             $model = new $_REQUEST['model']();
+            $function = $_REQUEST['function'];
 
             $aDNS = explode(",", $_REQUEST['dns_lookup']);
-
+            
             for($i = 0; $i < count($aDNS); $i++) {
-                $aResult = array_merge($aResult, $model->lookupForDNS($aDNS[$i]));
+                $aRecord = $model->$function($aDNS[$i]);
+                
+                if(is_array($aRecord)) {
+                    $aResult = array_merge($aResult, $aRecord);
+                }
+                /* else {
+                    var_dump($aRecord);
+                } */
             }
 
             echo json_encode($aResult);
         }
         else {
-            throw new Exception("Empty model name", 1);
+            throw new Exception("Empty model or function name", 1);
         }        
     } catch (\Exception $th) {
         $aResult = array("error" => array("type" => "alert", "msj" => $th->getMessage()));

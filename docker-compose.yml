@@ -11,3 +11,11 @@ web:
 sqlite3:
     build: './sqlite3/'
     restart: always
+
+sqliteweb:
+    image: tomdesinto/sqliteweb
+    ports:
+        - 8080:8080
+    volumes:
+        - ./www/resources/db/lookup.db:/db/my_database.db
+    command: my_database.db
